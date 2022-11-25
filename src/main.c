@@ -8,6 +8,7 @@
     #include <zephyr/logging/log.h>
 #endif
 
+#include "bmp280.h"
 #include "bluetooth.h"
 
 #define LOG_MODULE_NAME app
@@ -16,6 +17,8 @@
 LOG_MODULE_REGISTER(LOG_MODULE_NAME);
 
 void main(void) {
+    const struct device *bmp280 = get_bmp280_device();
+
     LOG_INF("Starting bluetooth...", NULL);
     start_bluetooth();
     LOG_INF("Bluetooth started", NULL);

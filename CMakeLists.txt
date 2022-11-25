@@ -6,6 +6,7 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(soia_weather_station_firmware)
 
 target_sources(app PRIVATE 
+    src/bmp280.c
     src/bluetooth.c
     src/main.c
 )
