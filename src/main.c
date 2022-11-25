@@ -3,17 +3,27 @@
     #include <zephyr/kernel.h>
 #endif
 
+#ifndef LOG_H
+    #define LOG_H
+    #include <zephyr/logging/log.h>
+#endif
+
 #include "bluetooth.h"
 
-#define SLEEP_TIME 1000
+#define LOG_MODULE_NAME app
+#define SLEEP_TIME 3000
+
+LOG_MODULE_REGISTER(LOG_MODULE_NAME);
 
 void main(void) {
-    printk("INFO: Starting bluetooth...");
+    LOG_INF("Starting bluetooth...", NULL);
     start_bluetooth();
-    printk("INFO: Bluetooth started");
+    LOG_INF("Bluetooth started", NULL);
 
     while (true) {
         k_sleep(K_MSEC(SLEEP_TIME));
+        update(TEMP, 23);
+        update(PRESS, 1000);
     }
     
 }
