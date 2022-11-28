@@ -13,3 +13,4 @@
 #include <zephyr/drivers/sensor.h>
 
 const struct device *get_bmp280_device(void);
+int32_t *get_sensor_readings(struct device *dev);

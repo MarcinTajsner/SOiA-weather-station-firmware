@@ -102,7 +102,7 @@ void on_sent_press(struct bt_conn *conn, void *user_data) {
     LOG_INF("Pressure notification sent", NULL);
 }
 
-int send_notification(struct bt_conn *conn, int16_t value, enum notification_type type) {
+int send_notification(struct bt_conn *conn, int32_t value, enum notification_type type) {
     int err = 0;
 
     if (type == TEMP && temp_notify == false) {
@@ -125,7 +125,7 @@ int send_notification(struct bt_conn *conn, int16_t value, enum notification_typ
         params.func = on_sent_press;
     }
     params.data = &value;
-    params.len = 2;
+    params.len = 4;
 
     err = bt_gatt_notify_cb(conn, &params);
 
@@ -161,7 +161,7 @@ int bt_init(struct bt_conn_cb *bt_cb) {
     return err;
 }
 
-int update(enum notification_type type, int16_t value) {
+int update(enum notification_type type, int32_t value) {
     int err = 0;
     err = send_notification(current_conn, value, type);
     if (err) {

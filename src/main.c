@@ -18,6 +18,7 @@ LOG_MODULE_REGISTER(LOG_MODULE_NAME);
 
 void main(void) {
     const struct device *bmp280 = get_bmp280_device();
+    int32_t *readings;
 
     LOG_INF("Starting bluetooth...", NULL);
     start_bluetooth();
@@ -25,8 +26,9 @@ void main(void) {
 
     while (true) {
         k_sleep(K_MSEC(SLEEP_TIME));
-        update(TEMP, 23);
-        update(PRESS, 1000);
+        readings = get_sensor_readings(bmp280);
+        update(TEMP, readings[0]);
+        update(PRESS, readings[1]);
     }
     
 }

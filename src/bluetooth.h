@@ -38,6 +38,6 @@ enum notification_type {
     PRESS
 };
 
-int update(enum notification_type type, int16_t value);
+int update(enum notification_type type, int32_t value);
 
 int start_bluetooth(void);
